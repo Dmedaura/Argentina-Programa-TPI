@@ -1,3 +1,5 @@
+package trabajopráctico;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,19 +11,17 @@ public class ProdeDeportivo {
             return;
         }
 
-        // Obtener las rutas de los archivos de partidos y resultados
-        String archivoPartidos = args[0];
-        String archivoResultados = args[1];
+      
 
         // Leemos el archivo de partidos
         Partido[] partidos = new Partido[2]; // el 2 indica la cantidad de elementos, en este caso 2 PARTIDOS (0 y 1)
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoPartidos))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("resultados.csv"))) {
             String linea;
             int i = 0;
             while ((linea = br.readLine()) != null && i < 2) {
                 String[] campos = linea.split(",");
-                Equipo equipoLocal = new Equipo(campos[0], 0);
-                Equipo equipoVisitante = new Equipo(campos[1], 0);
+               Equipo equipoLocal = new Equipo(campos[0], 0);
+               Equipo equipoVisitante = new Equipo(campos[1], 0);
                 partidos[i] = new Partido(equipoLocal, equipoVisitante);
                 i++;
             }
@@ -32,8 +32,8 @@ public class ProdeDeportivo {
 
         // Leer el archivo de resultados y crear un objeto de la clase Pronostico
         Pronostico pronostico;
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoResultados))) {
-            String line = br.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader("pronostico.csv"))) {
+            String line = reader.readLine();
             String[] tokens = line.split(",");
             String resultadoPartido1 = tokens[0];
             String resultadoPartido2 = tokens[1];
