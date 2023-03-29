@@ -20,8 +20,8 @@ public class ProdeDeportivo {
             int i = 0;
             while ((linea = br.readLine()) != null && i < 2) {
                 String[] campos = linea.split(",");
-                Equipo equipoLocal = new Equipo(campos[0]);
-                Equipo equipoVisitante = new Equipo(campos[1]);
+                Equipo equipoLocal = new Equipo(campos[0], 0);
+                Equipo equipoVisitante = new Equipo(campos[1], 0);
                 partidos[i] = new Partido(equipoLocal, equipoVisitante);
                 i++;
             }
@@ -65,9 +65,9 @@ class Equipo {
     public String nombre;
     public int goles;
 
-    public Equipo(String nombre) {
+    public Equipo(String nombre, int goles) {
         this.nombre = nombre;
-        this.goles = 0;
+        this.goles = goles;
     }
 }
 
