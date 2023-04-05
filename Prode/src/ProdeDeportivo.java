@@ -1,27 +1,24 @@
-package trabajopráctico;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class ProdeDeportivo {
     public static void main(String[] args) {
-        if (args.length != 2) { // para asegurarse de que sean 2 los archivos recibidos
-            System.err.println("Debe proporcionar dos archivos");
-            return;
-        }
 
-      
+        // Obtener las rutas de los archivos de partidos y resultados
+
+        String achivoPartidos = "D:\Daniel\Curso java\Trabajo Practico Integrador\Prode\Archivos\Partidos.txt";
+        String archivoResultados = "D:\\Daniel\\Curso java\\Trabajo Practico Integrador\\Prode\\Archivos\\Pronosticos.txt";
 
         // Leemos el archivo de partidos
         Partido[] partidos = new Partido[2]; // el 2 indica la cantidad de elementos, en este caso 2 PARTIDOS (0 y 1)
-        try (BufferedReader br = new BufferedReader(new FileReader("resultados.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoPartidos))) {
             String linea;
             int i = 0;
             while ((linea = br.readLine()) != null && i < 2) {
                 String[] campos = linea.split(",");
-               Equipo equipoLocal = new Equipo(campos[0], 0);
-               Equipo equipoVisitante = new Equipo(campos[1], 0);
+                Equipo equipoLocal = new Equipo(campos[0]);
+                Equipo equipoVisitante = new Equipo(campos[1]);
                 partidos[i] = new Partido(equipoLocal, equipoVisitante);
                 i++;
             }
@@ -32,8 +29,8 @@ public class ProdeDeportivo {
 
         // Leer el archivo de resultados y crear un objeto de la clase Pronostico
         Pronostico pronostico;
-        try (BufferedReader reader = new BufferedReader(new FileReader("pronostico.csv"))) {
-            String line = reader.readLine();
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoResultados))) {
+            String line = br.readLine();
             String[] tokens = line.split(",");
             String resultadoPartido1 = tokens[0];
             String resultadoPartido2 = tokens[1];
@@ -65,9 +62,9 @@ class Equipo {
     public String nombre;
     public int goles;
 
-    public Equipo(String nombre, int goles) {
+    public Equipo(String nombre) {
         this.nombre = nombre;
-        this.goles = goles;
+        this.goles = 0;
     }
 }
 
